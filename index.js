@@ -1,20 +1,72 @@
 'use strict';
 
-const keyFreqMap = {
-  c4: 261.6,
-  'c4#': 277.2,
-  d4: 293.7,
-  e4b: 311.1,
-  e4: 329.6,
-  f4: 349.2,
-  'f4#': 370.0,
-  g4: 392.0,
-  'g4#': 415.3,
-  a4: 440.0,
-  b4b: 466.2,
-  b4: 493.9,
-  c5: 523.3
-};
+const keyMap = {
+  65: {
+    freq: 261.6,
+    key: 'a',
+    note: 'c4'
+  },
+  87: {
+    freq: 277.2,
+    key: 'w',
+    note: 'c4#'
+  },
+  83: {
+    freq: 293.7,
+    key: 's',
+    note: 'd4'
+  },
+  69: {
+    freq: 311.1,
+    key: 'e',
+    note: 'e4b'
+  },
+  68: {
+    freq: 329.6,
+    key: 'd',
+    note: 'e4',
+  },
+  70: {
+    freq: 349.2,
+    key: 'f',
+    note: 'f4',
+  },
+  85: {
+    freq: 370.0,
+    key: 'u',
+    note: 'f4#',
+  },
+  74: {
+    freq: 392.0,
+    key: 'j',
+    note: 'g4',
+  },
+  73: {
+    freq: 415.3,
+    key: 'i',
+    note: 'g4#',
+  },
+  75: {
+    freq: 440.0,
+    key: 'k',
+    note: 'a4',
+  },
+  79: {
+    freq: 466.2,
+    key: 'o',
+    note: 'b4b',
+  },
+  76: {
+    freq: 493.9,
+    key: 'l',
+    note: 'b4',
+  },
+  186: {
+    freq: 523.3,
+    key: ';',
+    note: 'c5',
+  }
+}
 
 class Keyboard {
   constructor() {
@@ -40,23 +92,19 @@ class Keyboard {
   }
 
   bindEvents() {
-    // grab all of the key elements and attach listeners
-    let keys = document.querySelectorAll('.key');
-
-    keys.forEach((k) => {
-      k.addEventListener('mousedown', this.playNote.bind(this));
-      k.addEventListener('mouseup', this.releaseNote.bind(this));
-    });
+    document.body.addEventListener('keydown', this.playNote.bind(this));
+    document.body.addEventListener('keyup', this.releaseNote.bind(this));
   }
 
   playNote(e) {
-    let note = e.target.id;
-    let freq = keyFreqMap[note];
-    console.log(note, freq);
+    let note = keyMap[e.keyCode];
+    if (!note) return;
+
+    let freq = note.freq;
     this.osc.frequency.value = freq;
     this.amp.gain.value = 1;
 
-    this.setKeyName(note);
+    this.setKeyName(note.note);
   }
 
   releaseNote(e) {
