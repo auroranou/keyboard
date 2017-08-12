@@ -105,10 +105,16 @@ class Keyboard {
     this.amp.gain.value = 1;
 
     this.setKeyName(note.note);
+    this.selectKey(note.note);
   }
 
   releaseNote(e) {
+    let note = keyMap[e.keyCode];
     this.amp.gain.value = 0;
+
+    if (note) {
+      this.unselectKey(note.note);
+    }
   }
 
   setKeyName(str) {
@@ -123,6 +129,24 @@ class Keyboard {
 
     let keyDiv = document.getElementById('key-name');
     keyDiv.innerHTML = keyName;
+  }
+
+  selectKey(divId) {
+    let key = document.getElementById(divId);
+    if (key) {
+      key.classList.contains('key-b')
+      ? key.style.backgroundColor = '#444'
+      : key.style.backgroundColor = '#eee';
+    }
+  }
+
+  unselectKey(divId) {
+    let key = document.getElementById(divId);
+    if (key) {
+      key.classList.contains('key-b')
+      ? key.style.backgroundColor = '#000'
+      : key.style.backgroundColor = '#fff';
+    }
   }
 }
 
