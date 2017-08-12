@@ -4,8 +4,6 @@ let ctx = new AudioContext();
 
 // this generates a wave
 let osc = ctx.createOscillator();
-// sine is the default, but just explicitly stating here
-osc.type = 'sine';
 
 // gain in an analog system is how much extra electricity you boost the signal with
 let amp = ctx.createGain();
@@ -27,6 +25,8 @@ let keyFreqMap = {
 };
 
 function init() {
+  // sine is the default, but just explicitly stating here
+  osc.type = 'sine';
   osc.start(0);
 
   amp.gain.value = 0;
@@ -35,10 +35,9 @@ function init() {
   amp.connect(ctx.destination);
 }
 
-init();
-
 // grab all of the key elements and attached listeners
 let keys = document.querySelectorAll('.key');
+let keyDiv = document.getElementById('key-name');
 
 keys.forEach((k) => {
   k.addEventListener('mousedown', playNote);
@@ -46,11 +45,29 @@ keys.forEach((k) => {
 });
 
 function playNote(e) {
-  let freq = keyFreqMap[e.target.id];
+  let note = e.target.id;
+  let freq = keyFreqMap[note];
   osc.frequency.value = freq;
   amp.gain.value = 1;
+
+  getKeyName(note);
 }
 
 function releaseNote(e) {
   amp.gain.value = 0;
 }
+
+function getKeyName(str) {
+  let values = str.split(/[0-9]/g);
+  let keyName = values[0].toUpperCase();
+  if (values[1]) {
+    let mod = values[1] === '#'
+      ? '-sharp'
+      : '-flat';
+    keyName += mod;
+  }
+
+  keyDiv.innerHTML = keyName;
+}
+
+init();
