@@ -1,0 +1,9 @@
+{
+  "name": "keyboard",
+  "scripts": {
+    "test": "eslint . && tape test/*.test.js"
+  },
+  "devDependencies": {
+    "tape": "4.8.0"
+  }
+}
