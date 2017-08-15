@@ -1,5 +1,5 @@
 const test = require('tape');
-const notes = require('../lib/notes.js');
+const notes = require('../src/lib/notes.js');
 
 test('[notes] getFreq', t => {
   t.equals(notes.getFreq(3), 523.3, 'c3 = 523.3');

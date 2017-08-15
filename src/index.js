@@ -66,7 +66,7 @@ const keyMap = {
     key: ';',
     note: 'c5',
   }
-}
+};
 
 class Keyboard {
   constructor() {
