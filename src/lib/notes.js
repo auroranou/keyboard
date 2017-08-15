@@ -15,8 +15,9 @@ f3 = 440 * (1.059463..)3 = 523.3 Hz
 const notes = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
 
 module.exports = {
-  makeNotes: function() {
+  notes: notes,
 
+  makeNotes: function() {
     const octave = 4;
 
     const pitches = notes.reduce((memo, note) => {
@@ -24,8 +25,10 @@ module.exports = {
       return memo;
     }, {});
 
+    console.log('pitches: ', pitches);
     return pitches;
   },
+
   getSteps: function(note, octave) {
     let index = notes.indexOf(note);
     if (octave < 4) return (Math.abs(octave - 4) * -12) - (13 - index);
@@ -33,6 +36,7 @@ module.exports = {
     if (octave === 4) return (index < 3) ? index : index - 12;
     if (octave === 5) return (index > 2) ? index : index + 12;
   },
+
   getFreq: function(steps) {
     const a = Math.pow(2, (1/12));
     const dec = 10; // how many decimals u want. 10=tenths, 100=hundredths, etc

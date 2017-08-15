@@ -1,27 +1,31 @@
-var path = require('path');
-var webpack = require('webpack');
+'use strict';
+
+let path = require('path');
+let webpack = require('webpack');
 
 module.exports = {
-  context: __dirname + '/lib',
+  context: __dirname + '/src',
   entry: [
     'babel-polyfill',
-    __dirname + '/index'
+    __dirname + '/src/index.js'
   ],
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './'
+    contentBase: path.join(__dirname, 'src')
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        include: path.join(__dirname, 'lib'),
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015'],  
+          presets: [
+            ['es2015', {'modules': false}]
+          ]
         }
       }
     ]
