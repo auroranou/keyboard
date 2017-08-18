@@ -4,17 +4,15 @@ let path = require('path');
 let webpack = require('webpack');
 
 module.exports = {
-  context: __dirname + '/src',
-  entry: [
-    'babel-polyfill',
-    __dirname + '/src/index.js'
-  ],
+  context: path.resolve(__dirname, 'src'),
+  entry: path.resolve(__dirname, 'src/index.js'),
+  devtool: 'source-map',
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'src')
+  resolve: {
+    extensions: ['.js']
   },
   module: {
     loaders: [
@@ -29,5 +27,5 @@ module.exports = {
         }
       }
     ]
-  }
+  },
 }
