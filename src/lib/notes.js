@@ -12,34 +12,30 @@ a = (2)1/12 = the twelth root of 2 = the number which when multiplied by itself 
 f3 = 440 * (1.059463..)3 = 523.3 Hz
 */
 
-const notes = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
+export const notes = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
 
-module.exports = {
-  notes: notes,
+export const makeNotes = () => {
+  const octave = 4;
 
-  makeNotes: function() {
-    const octave = 4;
+  const pitches = notes.reduce((memo, note) => {
+    memo[note + octave] = this.getSteps(note, octave);
+    return memo;
+  }, {});
 
-    const pitches = notes.reduce((memo, note) => {
-      memo[note + octave] = this.getSteps(note, octave);
-      return memo;
-    }, {});
+  console.log('pitches: ', pitches);
+  return pitches;
+}
 
-    console.log('pitches: ', pitches);
-    return pitches;
-  },
+export const getSteps = (note, octave) => {
+  let index = notes.indexOf(note);
+  if (octave < 4) return (Math.abs(octave - 4) * -12) - (13 - index);
+  if (octave > 5) return ((octave - 5) * 12) + index;
+  if (octave === 4) return (index < 3) ? index : index - 12;
+  if (octave === 5) return (index > 2) ? index : index + 12;
+}
 
-  getSteps: function(note, octave) {
-    let index = notes.indexOf(note);
-    if (octave < 4) return (Math.abs(octave - 4) * -12) - (13 - index);
-    if (octave > 5) return ((octave - 5) * 12) + index;
-    if (octave === 4) return (index < 3) ? index : index - 12;
-    if (octave === 5) return (index > 2) ? index : index + 12;
-  },
-
-  getFreq: function(steps) {
-    const a = Math.pow(2, (1/12));
-    const dec = 10; // how many decimals u want. 10=tenths, 100=hundredths, etc
-    return Math.round(440 * Math.pow(a, steps) * dec) / dec;
-  }
-};
+export const getFreq = (steps) => {
+  const a = Math.pow(2, (1/12));
+  const dec = 10; // how many decimals u want. 10=tenths, 100=hundredths, etc
+  return Math.round(440 * Math.pow(a, steps) * dec) / dec;
+}

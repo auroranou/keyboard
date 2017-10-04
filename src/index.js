@@ -1,5 +1,23 @@
 'use strict';
 
+import * as helpers from './lib/notes';
+
+const KEYS = {
+  83: 's',
+  69: 'e',
+  68: 'd',
+  82: 'r',
+  70: 'f',
+  71: 'g',
+  89: 'y',
+  72: 'h',
+  85: 'u',
+  74: 'j',
+  73: 'i',
+  75: 'k',
+  76: 'l'
+};
+
 const keyMap = {
   65: {
     freq: 261.6,

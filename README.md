@@ -3,7 +3,7 @@
 ### local dev
 ```
 yarn install
-yarn serve
+yarn start
 // runs at localhost:8080
 ```
 
