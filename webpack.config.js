@@ -23,7 +23,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js', '.scss', '.css']
   },
   module: {
     loaders: [
@@ -36,6 +36,10 @@ module.exports = {
             ['es2015', {'modules': false}]
           ]
         }
+      },
+      {
+        test: /\.scss$/,
+        loaders: 'style-loader!css-loader!sass-loader'
       }
     ]
   },

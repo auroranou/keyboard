@@ -1,6 +1,7 @@
 'use strict';
 
 import * as helpers from './lib/notes';
+import '!style-loader!css-loader!sass-loader!./styles.scss';
 
 const KEYS = {
   83: 's',
