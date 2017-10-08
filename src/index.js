@@ -15,75 +15,7 @@ const KEYS = {
   74: 'j',
   73: 'i',
   75: 'k',
-  76: 'l'
-};
-
-const keyMap = {
-  65: {
-    freq: 261.6,
-    key: 'a',
-    note: 'c4'
-  },
-  87: {
-    freq: 277.2,
-    key: 'w',
-    note: 'c4#'
-  },
-  83: {
-    freq: 293.7,
-    key: 's',
-    note: 'd4'
-  },
-  69: {
-    freq: 311.1,
-    key: 'e',
-    note: 'e4b'
-  },
-  68: {
-    freq: 329.6,
-    key: 'd',
-    note: 'e4',
-  },
-  70: {
-    freq: 349.2,
-    key: 'f',
-    note: 'f4',
-  },
-  85: {
-    freq: 370.0,
-    key: 'u',
-    note: 'f4#',
-  },
-  74: {
-    freq: 392.0,
-    key: 'j',
-    note: 'g4',
-  },
-  73: {
-    freq: 415.3,
-    key: 'i',
-    note: 'g4#',
-  },
-  75: {
-    freq: 440.0,
-    key: 'k',
-    note: 'a4',
-  },
-  79: {
-    freq: 466.2,
-    key: 'o',
-    note: 'b4b',
-  },
-  76: {
-    freq: 493.9,
-    key: 'l',
-    note: 'b4',
-  },
-  186: {
-    freq: 523.3,
-    key: ';',
-    note: 'c5',
-  }
+  // 76: 'l'
 };
 
 class Keyboard {
@@ -106,7 +38,57 @@ class Keyboard {
     this.osc.connect(this.amp);
     this.amp.connect(this.ctx.destination);
 
+    // create the array for holding keys
+    this.keys = this.createKeyboard();
+
+    this.setupKeyboardHtml(this.keys);
     this.bindEvents();
+  }
+
+  createKeyboard() {
+    // create keyboard
+    const notes = helpers.makeNotes();
+    const noteNames = Object.keys(notes);
+
+    return Object.entries(KEYS).reduce((memo, [k, v], i) => {
+      const noteName = noteNames[i];
+      const pitch = notes[noteName];
+
+      memo[k] = {
+        alphaKey: k,
+        alphaKeyName: v,
+        freq: helpers.getFreq(pitch),
+        noteName,
+        pitch
+      };
+
+      return memo;
+    }, {});
+  }
+
+  setupKeyboardHtml(keys) {
+    // append keyboard to DOM
+    let keyboardEl = document.createElement('div');
+    keyboardEl.id = 'keyboard';
+
+    Object.values(keys).forEach((val, i) => {
+      let keyEl = document.createElement('div');
+      keyEl.id = val.noteName;
+
+      const classNames = val.noteName.indexOf('#') > -1 
+        ? ['key', 'key-b'] 
+        : ['key', 'key-w'];
+      keyEl.classList.add(...classNames);
+
+      keyboardEl.appendChild(keyEl);
+    });
+
+    document.body.appendChild(keyboardEl);
+
+    // append div containing key name to DOM
+    let keyNameEl = document.createElement('div');
+    keyNameEl.id = 'key-name';
+    document.body.appendChild(keyNameEl);
   }
 
   bindEvents() {
@@ -115,19 +97,19 @@ class Keyboard {
   }
 
   playNote(e) {
-    let note = keyMap[e.keyCode];
+    let note = this.keys[e.keyCode];
     if (!note) return;
 
     let freq = note.freq;
     this.osc.frequency.value = freq;
     this.amp.gain.value = 1;
 
-    this.setKeyName(note.note);
+    this.setKeyName(note.noteName);
     this.selectKey(note.note);
   }
 
   releaseNote(e) {
-    let note = keyMap[e.keyCode];
+    let note = this.keys[e.keyCode];
     this.amp.gain.value = 0;
 
     if (note) {

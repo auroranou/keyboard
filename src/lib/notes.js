@@ -18,11 +18,10 @@ export const makeNotes = () => {
   const octave = 4;
 
   const pitches = notes.reduce((memo, note) => {
-    memo[note + octave] = this.getSteps(note, octave);
+    memo[note + octave] = getSteps(note, octave);
     return memo;
   }, {});
 
-  console.log('pitches: ', pitches);
   return pitches;
 }
 
