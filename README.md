@@ -16,24 +16,23 @@ yarn test
 tests are run using `tape`.
 
 ### playing notes
-// c major scale
-// (💻 ️s = 🎹 middle c)
+c major scale (💻 ️s = 🎹 middle c)
 ```
 s d f g h j k
 ```
 
-// chromatic scale
+chromatic scale
 ```
 s e d r f g y h u j i k
 ```
 
-// 💀
+💀 💀 💀
 ```
 s s s s
 f r e e e s e
 ```
 
-// 🐑
+👩 🐑 🌨
 ```
 d s a s d d d d s s d s a
 f d s d f f f
