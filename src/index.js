@@ -3,21 +3,21 @@
 import * as helpers from './lib/notes';
 import '!style-loader!css-loader!sass-loader!./styles.scss';
 
-const KEYS = {
-  83: 's',
-  69: 'e',
-  68: 'd',
-  82: 'r',
-  70: 'f',
-  71: 'g',
-  89: 'y',
-  72: 'h',
-  85: 'u',
-  74: 'j',
-  73: 'i',
-  75: 'k',
-  // 76: 'l'
-};
+const KEYS = [
+  { 83: 's' },
+  { 69: 'e' },
+  { 68: 'd' },
+  { 82: 'r' },
+  { 70: 'f' },
+  { 71: 'g' },
+  { 89: 'y' },
+  { 72: 'h' },
+  { 85: 'u' },
+  { 74: 'j' },
+  { 73: 'i' },
+  { 75: 'k' },
+  // { 76: 'l' }
+];
 
 class Keyboard {
   constructor() {
@@ -49,22 +49,23 @@ class Keyboard {
   createKeyboard() {
     // create keyboard
     const notes = helpers.makeNotes();
-    const noteNames = Object.keys(notes);
+    const noteNames = Object.keys(notes).map((n, i, a) => {
+      return {
+        freq: helpers.getFreq(notes[n]),
+        noteName: n,
+        pitch: notes[n]
+      }
+    }).sort((a, b) => {
+      return a.pitch - b.pitch;
+    }).map((n, i, a) => {
+      const alphaKey = KEYS[i];
+      return Object.assign({
+        alphaKey: Object.keys(alphaKey)[0],
+        alphaKeyName: Object.values(alphaKey)[0]
+      }, n);
+    });
 
-    return Object.entries(KEYS).reduce((memo, [k, v], i) => {
-      const noteName = noteNames[i];
-      const pitch = notes[noteName];
-
-      memo[k] = {
-        alphaKey: k,
-        alphaKeyName: v,
-        freq: helpers.getFreq(pitch),
-        noteName,
-        pitch
-      };
-
-      return memo;
-    }, {});
+    return noteNames;
   }
 
   setupKeyboardHtml(keys) {
@@ -98,7 +99,7 @@ class Keyboard {
   }
 
   playNote(e) {
-    let note = this.keys[e.keyCode];
+    let note = this.keys.find((k) => k.alphaKey === e.keyCode.toString());
     if (!note) return;
 
     let freq = note.freq;
@@ -110,7 +111,7 @@ class Keyboard {
   }
 
   releaseNote(e) {
-    let note = this.keys[e.keyCode];
+    let note = this.keys.find((k) => k.alphaKey === e.keyCode.toString());
     this.amp.gain.value = 0;
 
     if (note) {
