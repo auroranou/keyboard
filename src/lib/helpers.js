@@ -30,9 +30,10 @@ const qwertyKeyMap = [
   { 76: 'l' }
 ];
 
-export const keys = Object.keys(qwertyKeyMap).map((k, i) => {
+export const keys = qwertyKeyMap.map((qwerty, i) => {
   return {
     pitch: octave[i],
-    qwertyCode: k
+    qwertyCode: Object.keys(qwerty)[0],
+    qwertyName: Object.values(qwerty)[0]
   }
-});
+})
