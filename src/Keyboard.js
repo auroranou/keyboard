@@ -3,6 +3,11 @@
 import { Key } from './Key';
 import { octave, keys } from './lib/helpers';
 
+/**
+ * Keyboard part of the synthesizer; receives a shared audio context from the Synth class.
+ * @constructor
+ * @param {AudioContext} audio
+ */
 export class Keyboard {
   constructor(audio) {
     this.audio = audio;
@@ -11,12 +16,13 @@ export class Keyboard {
       return new Key(k.pitch, k.qwertyCode, k.qwertyName);
     });
 
-    console.log(this.keys);
-
     this.buildKeyboardHtml();
     this.bindKeyEvents();
   }
 
+  /**
+   * Create <div> elements for the keyboard wrapper and 13 keys representing a full octave.
+   */
   buildKeyboardHtml() {
     let keyboardEl = document.createElement('div');
     keyboardEl.id = 'keyboard';
@@ -40,25 +46,41 @@ export class Keyboard {
     });
   }
 
+  /**
+   * Add keydown and keyup event listeners to play/stop playing notes.
+   */
   bindKeyEvents() {
     document.body.addEventListener('keydown', this.playNote.bind(this));
     document.body.addEventListener('keyup', this.releaseNote.bind(this));
   }
 
+  /**
+   * Attempt to find the piano key corresponding to the computer key that has been manipulated.
+   * @param {number} code 
+   */
   getNoteFromKeyCode(code) {
     return this.keys.find(k => k.qwertyCode == code);
   }
 
+  /**
+   * If a matching note is found, set the audio context's frequency to the note frequency
+   * in order to play the note. Also manipulate element's CSS to give a visual cue of which note is active.
+   * @param {HTMLEvent} e 
+   */
   playNote(e) {
     let note = this.getNoteFromKeyCode(e.keyCode);
     if (!note) return;
-    console.log(note);
+
     this.audio.osc.frequency.value = note.frequency;
     this.audio.amp.gain.value = 1;
 
     document.getElementById(note.pitch).classList.add('key--active');
   }
 
+  /**
+   * Stop sending power to the audio context's amp and remove any active classes.
+   * @param {HTMLEvent} e 
+   */
   releaseNote(e) {
     let note = this.getNoteFromKeyCode(e.keyCode);
     this.audio.amp.gain.value = 0;
