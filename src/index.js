@@ -1,12 +1,12 @@
 'use strict';
 
 import '!style-loader!css-loader!sass-loader!./styles.scss';
-import { Keyboard } from './Keyboard';
+import { Synth } from './Synth';
 
 document.addEventListener('DOMContentLoaded', () => {
   let keyboardEl = document.createElement('div');
   keyboardEl.id = 'keyboard';
   document.body.appendChild(keyboardEl);
 
-  const keyboard = new Keyboard();
+  const synth = new Synth();
 });

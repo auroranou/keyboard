@@ -4,7 +4,9 @@ import { Key } from './Key';
 import { octave, keys } from './lib/helpers';
 
 export class Keyboard {
-  constructor() {
+  constructor(audio) {
+    this.audio = audio;
+
     this.keys = keys.map(k => {
       return new Key(k.qwertyCode, k.pitch);
     });
@@ -30,6 +32,6 @@ export class Keyboard {
       }
 
       keyboardEl.appendChild(keyEl);
-    })
+    });
   }
 }
