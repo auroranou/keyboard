@@ -24,6 +24,11 @@ html {
     transform: translateX(-#{$key-width-black / 2});
     width: $key-width-black;
     z-index: 1;
+
+    &.key--active,
+    &:hover {
+      background-color: #222;
+    }
   }
 
   &--white {
@@ -32,6 +37,11 @@ html {
     height: 240px;
     width: $key-width-white;
     z-index: 0;
+
+    &.key--active,
+    &:hover {
+      background-color: #eee;
+    }
 
     &:last-of-type {
       border-right-width: 1px;

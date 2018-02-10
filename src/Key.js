@@ -13,9 +13,10 @@ const pitchDistance = Math.pow(2, (1 / 12))
  * Each key has a QWERTY key code, pitch (piano key name), distance from fixed note, and frequency.
  */
 export class Key {
-  constructor(qwertyCode, pitch) {
-    this.qwertyCode = qwertyCode;
+  constructor(pitch, qwertyCode, qwertyName) {
     this.pitch = pitch;
+    this.qwertyCode = qwertyCode;
+    this.qwertyName = qwertyName;
 
     const stepDistance = this.getStepDistance(pitch);
     this.frequency = this.getFrequency(stepDistance);

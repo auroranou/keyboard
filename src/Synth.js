@@ -6,7 +6,7 @@ import { Keyboard } from './Keyboard';
 export class Synth {
   constructor() {
     // First set up a new audio context
-    this.audio = new AudioContext();
+    this.audio = new AudioCtx();
 
     // Create synth components, passing audio context to them
     this.keyboard = new Keyboard(this.audio);
