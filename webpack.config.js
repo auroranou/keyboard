@@ -9,7 +9,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
   devtool: 'source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: './src',
     hot: true
   },
   output: {
@@ -33,7 +33,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: [
-            ['es2015', {'modules': false}]
+            ['es2015', { 'modules': false }]
           ]
         }
       },

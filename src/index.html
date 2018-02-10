@@ -2,51 +2,9 @@
 <html lang='en'>
 <head>
   <meta charset='utf-8' />
-  <title>HTML5 audio keyboard</title>
+  <title>HTML5 audio synth</title>
 </head>
 <body>
-  <style>
-    #keyboard {
-      border: 1px solid #000;
-      display: inline-block;
-      position: relative;
-    }
-
-    .key {
-      background: #fff;
-      border: 1px solid #000;
-      cursor: pointer;
-      display: inline-block;
-      float: left;
-      height: 200px;
-      width: 40px;
-    }
-
-    .key-b {
-      background: #000;
-      height: 120px;
-      position: absolute;
-      transform: translate(-10px, 0);
-      width: 20px;
-    }
-  </style>
-  <div id='keyboard'>
-    <span class='key key-w' id='c4'></span>
-    <span class='key key-b' id='c4#'></span>
-    <span class='key key-w' id='d4'></span>
-    <span class='key key-b' id='e4b'></span>
-    <span class='key key-w' id='e4'></span>
-    <span class='key key-w' id='f4'></span>
-    <span class='key key-b' id='f4#'></span>
-    <span class='key key-w' id='g4'></span>
-    <span class='key key-b' id='g4#'></span>
-    <span class='key key-w' id='a4'></span>
-    <span class='key key-b' id='b4b'></span>
-    <span class='key key-w' id='b4'></span>
-    <span class='key key-w' id='c5'></span>
-  </div>
-  <div id='key-name'></div>
-
-  <script type='text/javascript' src='../dist/bundle.js'></script>
+  <div id='root'></div>
 </body>
 </html>

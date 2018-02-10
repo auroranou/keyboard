@@ -1,23 +1,50 @@
+@import './normalize.css';
+
+$key-width-black: 24px;
+$key-width-white: 36px;
+
+
+html {
+  font-size: 16px;
+}
+
 #keyboard {
-  border: 1px solid #000;
   display: inline-block;
   position: relative;
 }
 
 .key {
-  background: #fff;
   border: 1px solid #000;
   cursor: pointer;
-  display: inline-block;
-  float: left;
-  height: 200px;
-  width: 40px;
-}
-
-.key-b {
-  background: #000;
-  height: 120px;
   position: absolute;
-  transform: translate(-10px, 0);
-  width: 20px;
+
+  &--black {
+    background-color: black;
+    height: 150px;
+    transform: translateX(-#{$key-width-black / 2});
+    width: $key-width-black;
+    z-index: 1;
+
+    &.key--active,
+    &:hover {
+      background-color: #222;
+    }
+  }
+
+  &--white {
+    background-color: white;
+    border-right-width: 0;
+    height: 240px;
+    width: $key-width-white;
+    z-index: 0;
+
+    &.key--active,
+    &:hover {
+      background-color: #eee;
+    }
+
+    &:last-of-type {
+      border-right-width: 1px;
+    }
+  }
 }
