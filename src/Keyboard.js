@@ -37,7 +37,7 @@ export class Keyboard {
         keyEl.classList.add('key', 'key--black');
       } else {
         keyEl.classList.add('key', 'key--white');
-        offsetLeft += 36;
+        offsetLeft += 48;
       }
 
       keyboardEl.appendChild(keyEl);

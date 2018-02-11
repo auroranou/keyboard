@@ -1,29 +1,78 @@
 @import './normalize.css';
 
-$keyboard-height: 240px;
+$keyboard-height: 220px;
 $key-width-black: 24px;
-$key-width-white: 36px;
+$key-width-white: 48px;
 
 html {
+  font-family: sans-serif;
   font-size: 16px;
 }
 
+/* Synth wrapper */
 #synth {
-  display: grid;
+  background-color: #000;
+  border-bottom: 1rem solid #000;
+  border-radius: 8px;
+  display: inline-grid;
   grid-template-areas: 'panel-left body panel-right';
-  grid-template-columns: 2fr 7fr 1fr;
+  grid-template-columns: 10rem (8 * $key-width-white) 5rem;
 }
 
+/* Left-hand control panel */
 #synth__panel--left {
+  display: grid;
   grid-area: panel-left;
+  grid-template-areas: 'dial dial'
+                       'volume transpose'
+                       'modulator modulator';
+  grid-template-rows: calc(60px + 2rem) 2fr 1fr;
 }
 
+#alpha-dial {
+  grid-area: dial;
+
+  .dial {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    height: 60px;
+    margin: 1rem auto;
+    position: relative;
+    width: 60px;
+
+    &::after {
+      color: #fff;
+      content: 'a-dial';
+      font-size: 11px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      text-transform: uppercase;
+      top: calc(100% + 4px);
+    }
+  }
+}
+
+#volume-dialer {
+  grid-area: volume;
+}
+
+#transpose-buttons {
+  grid-area: transpose;
+}
+
+#modulator {
+  grid-area: modulator;
+}
+
+/* Middle part, including keyboard */
 #synth__body {
   grid-area: body;
 }
 
-#synth__panel-right {
-  grid-area: panel-right;
+#header {
+  height: calc(60px + 2rem);
 }
 
 #keyboard {
@@ -66,4 +115,9 @@ html {
       border-right-width: 1px;
     }
   }
+}
+
+/* Right-hand panel (contains no working parts) */
+#synth__panel-right {
+  grid-area: panel-right;
 }
