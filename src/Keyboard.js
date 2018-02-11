@@ -24,9 +24,7 @@ export class Keyboard {
    * Create <div> elements for the keyboard wrapper and 13 keys representing a full octave.
    */
   buildKeyboardHtml() {
-    let keyboardEl = document.createElement('div');
-    keyboardEl.id = 'keyboard';
-    document.body.appendChild(keyboardEl);
+    const keyboardEl = document.getElementById('keyboard');
 
     let offsetLeft = 0;
 
