@@ -4,6 +4,12 @@ $keyboard-height: 220px;
 $key-width-black: 24px;
 $key-width-white: 48px;
 
+@mixin control-panel-label() {
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
 html {
   font-family: sans-serif;
   font-size: 16px;
@@ -42,20 +48,34 @@ html {
 
     &::after {
       color: #fff;
-      content: 'a-dial';
+      content: '\03b1-DIAL';
       font-size: 11px;
       left: 0;
       position: absolute;
       right: 0;
       text-align: center;
-      text-transform: uppercase;
       top: calc(100% + 4px);
     }
   }
 }
 
-#volume-dialer {
+#volume-slider {
   grid-area: volume;
+  position: relative;
+
+  .slider {
+    left: -25%;
+    position: absolute;
+    top: 50%;
+    transform: rotate(90deg);
+  }
+
+  .slider-label {
+    @include control-panel-label();
+    left: 25%;
+    position: absolute;
+    top: 100%;
+  }
 }
 
 #transpose-buttons {
@@ -115,11 +135,12 @@ html {
 
     &:first-of-type {
       border-bottom-left-radius: 8px;
+      border-top-left-radius: 4px;
     }
 
     &:last-of-type {
       border-bottom-right-radius: 8px;
-      border-right-width: 1px;
+      border-top-right-radius: 4px;
     }
   }
 }
