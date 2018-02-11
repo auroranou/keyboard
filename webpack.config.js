@@ -18,7 +18,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Hot Module Replacement'
+      filename: 'index.html',
+      inject: 'body',
+      template: path.resolve(__dirname, 'src/index.html'),
+      title: 'HTML5 audio synth'
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
