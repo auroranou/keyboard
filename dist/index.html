@@ -1,9 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hot Module Replacement</title>
-  </head>
-  <body>
-  <script type="text/javascript" src="bundle.js"></script></body>
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8' />
+  <title>HTML5 audio synth</title>
+</head>
+<body>
+  <div id='synth'>
+    <div id='synth__panel--left'>
+      <div id='alpha-dial'>
+        <div class='dial'></div>
+      </div>
+      <div id='volume-slider'>
+        <input class='slider' id='volume-range' type='range' min='0' max='10' step='1'/>
+        <label class='slider-label' for='volume-range'>Volume</label>
+      </div>
+      <div id='transpose-buttons'>
+
+      </div>
+      <div id='modulator'>
+
+      </div>
+    </div>
+    <div id='synth__body'>
+      <div id='header'></div>
+      <div id='keyboard'></div>
+    </div>
+    <div id='synth__panel--right'></div>
+  </div>
+<script type="text/javascript" src="bundle.js"></script></body>
 </html>

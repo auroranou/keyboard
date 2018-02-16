@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b098d5965b3674229daa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "01705a6d371179bb2748"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -732,7 +732,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 exports.i(__webpack_require__(5), "");
 
 // module
-exports.push([module.i, "html {\n  font-size: 16px; }\n\n#keyboard {\n  display: inline-block;\n  position: relative; }\n\n.key {\n  border: 1px solid #000;\n  cursor: pointer;\n  position: absolute; }\n  .key--black {\n    background-color: black;\n    height: 150px;\n    transform: translateX(-12px);\n    width: 24px;\n    z-index: 1; }\n    .key--black.key--active, .key--black:hover {\n      background-color: #222; }\n  .key--white {\n    background-color: white;\n    border-right-width: 0;\n    height: 240px;\n    width: 36px;\n    z-index: 0; }\n    .key--white.key--active, .key--white:hover {\n      background-color: #eee; }\n    .key--white:last-of-type {\n      border-right-width: 1px; }\n", ""]);
+exports.push([module.i, "html {\n  font-family: sans-serif;\n  font-size: 16px; }\n\n/* Synth wrapper */\n#synth {\n  background-color: #000;\n  border-bottom: 1rem solid #000;\n  border-radius: 8px;\n  display: inline-grid;\n  grid-template-areas: 'panel-left body panel-right';\n  grid-template-columns: 10rem 384px 5rem; }\n\n/* Left-hand control panel */\n#synth__panel--left {\n  display: grid;\n  grid-area: panel-left;\n  grid-template-areas: 'dial dial' 'volume transpose' 'modulator modulator';\n  grid-template-rows: calc(60px + 2rem) 2fr 1fr; }\n\n#alpha-dial {\n  grid-area: dial; }\n  #alpha-dial .dial {\n    border: 1px solid #fff;\n    border-radius: 50%;\n    height: 60px;\n    margin: 1rem auto;\n    position: relative;\n    width: 60px; }\n    #alpha-dial .dial::after {\n      color: #fff;\n      content: '\\3B1-DIAL';\n      font-size: 11px;\n      left: 0;\n      position: absolute;\n      right: 0;\n      text-align: center;\n      top: calc(100% + 4px); }\n\n#volume-slider {\n  grid-area: volume;\n  position: relative; }\n  #volume-slider .slider {\n    left: -25%;\n    position: absolute;\n    top: 50%;\n    transform: rotate(90deg); }\n  #volume-slider .slider-label {\n    color: #fff;\n    font-size: 11px;\n    text-transform: uppercase;\n    left: 25%;\n    position: absolute;\n    top: 100%; }\n\n#transpose-buttons {\n  grid-area: transpose; }\n\n#modulator {\n  grid-area: modulator; }\n\n/* Middle part, including keyboard */\n#synth__body {\n  grid-area: body; }\n\n#header {\n  height: calc(60px + 2rem); }\n\n#keyboard {\n  display: inline-block;\n  height: 220px;\n  position: relative; }\n\n.key {\n  border: 1px solid #000;\n  border-bottom-left-radius: 4px;\n  border-bottom-right-radius: 4px;\n  cursor: pointer;\n  position: absolute; }\n  .key--black {\n    background-color: #000;\n    height: 137.5px;\n    transform: translateX(-12px);\n    width: 24px;\n    z-index: 1; }\n    .key--black.key--active, .key--black:hover {\n      background-color: #222; }\n  .key--white {\n    background-color: #fff;\n    border-right-width: 0;\n    height: 220px;\n    width: 48px;\n    z-index: 0; }\n    .key--white.key--active, .key--white:hover {\n      background-color: #eee; }\n    .key--white:first-of-type {\n      border-bottom-left-radius: 8px;\n      border-top-left-radius: 4px; }\n    .key--white:last-of-type {\n      border-bottom-right-radius: 8px;\n      border-top-right-radius: 4px; }\n\n/* Right-hand panel (contains no working parts) */\n#synth__panel-right {\n  grid-area: panel-right; }\n", ""]);
 
 // exports
 
@@ -821,40 +821,104 @@ function toComment(sourceMap) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return octave; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return keys; });
+var octave = [
+    'c4',
+    'c4#',
+    'd4',
+    'e4b',
+    'e4',
+    'f4',
+    'f4#',
+    'g4',
+    'a4b',
+    'a4',
+    'b4b',
+    'b4',
+    'c5'
+];
+var qwertyKeyMap = [
+    {
+        code: 83,
+        name: 's'
+    },
+    {
+        code: 69,
+        name: 'e'
+    },
+    {
+        code: 68,
+        name: 'd'
+    },
+    {
+        code: 82,
+        name: 'r'
+    },
+    {
+        code: 70,
+        name: 'f'
+    },
+    {
+        code: 71,
+        name: 'g'
+    },
+    {
+        code: 89,
+        name: 'y'
+    },
+    {
+        code: 72,
+        name: 'h'
+    },
+    {
+        code: 85,
+        name: 'u'
+    },
+    {
+        code: 74,
+        name: 'j'
+    },
+    {
+        code: 73,
+        name: 'i'
+    },
+    {
+        code: 75,
+        name: 'k'
+    },
+    {
+        code: 76,
+        name: 'l'
+    }
+];
+var keys = qwertyKeyMap.map(function (qwerty, i) {
+    return {
+        pitch: octave[i],
+        qwertyCode: qwerty.code,
+        qwertyName: qwerty.name
+    };
 });
-var octave = exports.octave = ['c4', 'c4#', 'd4', 'e4b', 'e4', 'f4', 'f4#', 'g4', 'a4b', 'a4', 'b4b', 'b4', 'c5'];
 
-var qwertyKeyMap = [{ 83: 's' }, { 69: 'e' }, { 68: 'd' }, { 82: 'r' }, { 70: 'f' }, { 71: 'g' }, { 89: 'y' }, { 72: 'h' }, { 85: 'u' }, { 74: 'j' }, { 73: 'i' }, { 75: 'k' }, { 76: 'l' }];
-
-var keys = exports.keys = qwertyKeyMap.map(function (qwerty, i) {
-  return {
-    pitch: octave[i],
-    qwertyCode: Object.keys(qwerty)[0],
-    qwertyName: Object.values(qwerty)[0]
-  };
-});
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_loader_css_loader_sass_loader_styles_scss__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_loader_css_loader_sass_loader_styles_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_loader_css_loader_sass_loader_styles_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Synth__ = __webpack_require__(8);
 
-
-__webpack_require__(4);
-
-var _Synth = __webpack_require__(8);
 
 document.addEventListener('DOMContentLoaded', function () {
-  var synth = new _Synth.Synth();
+    var synth = new __WEBPACK_IMPORTED_MODULE_1__Synth__["a" /* Synth */]();
 });
+
 
 /***/ }),
 /* 4 */
@@ -1370,227 +1434,212 @@ module.exports = function (css) {
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Synth; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AudioCtx__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Keyboard__ = __webpack_require__(10);
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Synth = undefined;
+var Synth = /** @class */ (function () {
+    function Synth() {
+        // First set up a new audio context
+        this.audio = new __WEBPACK_IMPORTED_MODULE_0__AudioCtx__["a" /* AudioCtx */]();
+        // Create synth components, passing audio context to them
+        this.keyboard = new __WEBPACK_IMPORTED_MODULE_1__Keyboard__["a" /* Keyboard */](this.audio);
+    }
+    return Synth;
+}());
 
-var _AudioCtx = __webpack_require__(9);
 
-var _Keyboard = __webpack_require__(10);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Synth = exports.Synth = function Synth() {
-  _classCallCheck(this, Synth);
-
-  // First set up a new audio context
-  this.audio = new _AudioCtx.AudioCtx();
-
-  // Create synth components, passing audio context to them
-  this.keyboard = new _Keyboard.Keyboard(this.audio);
-};
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AudioCtx; });
+var AudioCtx = /** @class */ (function () {
+    function AudioCtx() {
+        this.ctx = new AudioContext();
+        // this generates a wave
+        this.osc = this.ctx.createOscillator();
+        // sine is the default, but just explicitly stating here
+        this.osc.type = 'sine';
+        this.osc.start(0);
+        // gain in an analog system is how much extra electricity you boost the signal with
+        this.amp = this.ctx.createGain();
+        this.amp.gain.value = 0;
+        // connect the things
+        this.osc.connect(this.amp);
+        this.amp.connect(this.ctx.destination);
+    }
+    return AudioCtx;
+}());
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var AudioCtx = exports.AudioCtx = function AudioCtx() {
-  _classCallCheck(this, AudioCtx);
-
-  this.ctx = new AudioContext();
-
-  // this generates a wave
-  this.osc = this.ctx.createOscillator();
-
-  // sine is the default, but just explicitly stating here
-  this.osc.type = 'sine';
-  this.osc.start(0);
-
-  // gain in an analog system is how much extra electricity you boost the signal with
-  this.amp = this.ctx.createGain();
-
-  this.amp.gain.value = 0;
-
-  // connect the things
-  this.osc.connect(this.amp);
-  this.amp.connect(this.ctx.destination);
-};
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Keyboard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Key__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_helpers__ = __webpack_require__(2);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Keyboard = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Key = __webpack_require__(11);
-
-var _helpers = __webpack_require__(2);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Keyboard = exports.Keyboard = function () {
-  function Keyboard(audio) {
-    _classCallCheck(this, Keyboard);
-
-    this.audio = audio;
-
-    this.keys = _helpers.keys.map(function (k) {
-      return new _Key.Key(k.pitch, k.qwertyCode, k.qwertyName);
-    });
-
-    console.log(this.keys);
-
-    this.buildKeyboardHtml();
-    this.bindKeyEvents();
-  }
-
-  _createClass(Keyboard, [{
-    key: 'buildKeyboardHtml',
-    value: function buildKeyboardHtml() {
-      var keyboardEl = document.createElement('div');
-      keyboardEl.id = 'keyboard';
-      document.body.appendChild(keyboardEl);
-
-      var offsetLeft = 0;
-
-      this.keys.forEach(function (key) {
-        var keyEl = document.createElement('div');
-        keyEl.id = key.pitch;
-        keyEl.style.left = offsetLeft + 'px';
-
-        if (key.pitch.slice(-1) === '#' || key.pitch.slice(-1) === 'b') {
-          keyEl.classList.add('key', 'key--black');
-        } else {
-          keyEl.classList.add('key', 'key--white');
-          offsetLeft += 36;
+/**
+ * Keyboard part of the synthesizer; receives a shared audio context from the Synth class.
+ * @constructor
+ * @param {AudioCtx} audio
+ */
+var Keyboard = /** @class */ (function () {
+    function Keyboard(audio) {
+        this.audio = audio;
+        this.keys = __WEBPACK_IMPORTED_MODULE_1__lib_helpers__["a" /* keys */].map(function (k) {
+            return new __WEBPACK_IMPORTED_MODULE_0__Key__["a" /* Key */](__assign({}, k));
+        });
+        console.log(this.keys);
+        this.buildKeyboardHtml();
+        this.bindKeyEvents();
+    }
+    /**
+     * Create <div> elements for the keyboard wrapper and 13 keys representing a full octave.
+     */
+    Keyboard.prototype.buildKeyboardHtml = function () {
+        var keyboardEl = document.getElementById('keyboard');
+        var offsetLeft = 0;
+        this.keys.forEach(function (key) {
+            var keyEl = document.createElement('div');
+            keyEl.id = key.pitch;
+            keyEl.style.left = offsetLeft + "px";
+            if (key.pitch.slice(-1) === '#' || key.pitch.slice(-1) === 'b') {
+                keyEl.classList.add('key', 'key--black');
+            }
+            else {
+                keyEl.classList.add('key', 'key--white');
+                offsetLeft += 48;
+            }
+            keyboardEl.appendChild(keyEl);
+        });
+    };
+    /**
+     * Add keydown and keyup event listeners to play/stop playing notes.
+     */
+    Keyboard.prototype.bindKeyEvents = function () {
+        document.body.addEventListener('keydown', this.playNote.bind(this));
+        document.body.addEventListener('keyup', this.releaseNote.bind(this));
+    };
+    /**
+     * Attempt to find the piano key corresponding to the computer key that has been manipulated.
+     * @param {number} code
+     */
+    Keyboard.prototype.getNoteFromKeyCode = function (code) {
+        return this.keys.filter(function (k) { return k.qwertyCode === code; })[0];
+    };
+    /**
+     * If a matching note is found, set the audio context's frequency to the note frequency
+     * in order to play the note. Also manipulate element's CSS to give a visual cue of which note is active.
+     * @param {KeyboardEvent} e
+     */
+    Keyboard.prototype.playNote = function (e) {
+        var note = this.getNoteFromKeyCode(e.keyCode);
+        if (!note)
+            return;
+        this.audio.osc.frequency.value = note.frequency;
+        this.audio.amp.gain.value = 1;
+        document.getElementById(note.pitch).classList.add('key--active');
+    };
+    /**
+     * Stop sending power to the audio context's amp and remove any active classes.
+     * @param {KeyboardEvent} e
+     */
+    Keyboard.prototype.releaseNote = function (e) {
+        var note = this.getNoteFromKeyCode(e.keyCode);
+        this.audio.amp.gain.value = 0;
+        if (note) {
+            document.getElementById(note.pitch).classList.remove('key--active');
         }
+    };
+    return Keyboard;
+}());
 
-        keyboardEl.appendChild(keyEl);
-      });
-    }
-  }, {
-    key: 'bindKeyEvents',
-    value: function bindKeyEvents() {
-      document.body.addEventListener('keydown', this.playNote.bind(this));
-      document.body.addEventListener('keyup', this.releaseNote.bind(this));
-    }
-  }, {
-    key: 'getNoteFromKeyCode',
-    value: function getNoteFromKeyCode(code) {
-      return this.keys.find(function (k) {
-        return k.qwertyCode == code;
-      });
-    }
-  }, {
-    key: 'playNote',
-    value: function playNote(e) {
-      var note = this.getNoteFromKeyCode(e.keyCode);
-      if (!note) return;
-      console.log(note);
-      this.audio.osc.frequency.value = note.frequency;
-      this.audio.amp.gain.value = 1;
 
-      document.getElementById(note.pitch).classList.add('key--active');
-    }
-  }, {
-    key: 'releaseNote',
-    value: function releaseNote(e) {
-      var note = this.getNoteFromKeyCode(e.keyCode);
-      this.audio.amp.gain.value = 0;
-
-      if (note) {
-        document.getElementById(note.pitch).classList.remove('key--active');
-      }
-    }
-  }]);
-
-  return Keyboard;
-}();
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Key = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _helpers = __webpack_require__(2);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var fixedNotePitch = 'a4';
-var fixedNoteIndex = _helpers.octave.indexOf(fixedNotePitch);
-var fixedNoteFreq = 440;
-
-// The relationship between any two adjacent pitches in 12tet is the 12th root of 2, that is, that number which, when multiplied by itself 12 time, yields 2.
-var pitchDistance = Math.pow(2, 1 / 12);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Key; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_helpers__ = __webpack_require__(2);
 
 /**
- * Each key has a QWERTY key code, pitch (piano key name), distance from fixed note, and frequency.
+ * The A above middle C is commonly used to set other pitches in the scale against
  */
-
-var Key = exports.Key = function () {
-  function Key(pitch, qwertyCode, qwertyName) {
-    _classCallCheck(this, Key);
-
-    this.pitch = pitch;
-    this.qwertyCode = qwertyCode;
-    this.qwertyName = qwertyName;
-
-    var stepDistance = this.getStepDistance(pitch);
-    this.frequency = this.getFrequency(stepDistance);
-  }
-
-  /**
-   * Returns a positive or negative integer indicating the number of steps from the fixed note
-   */
-
-
-  _createClass(Key, [{
-    key: 'getStepDistance',
-    value: function getStepDistance(pitch) {
-      return _helpers.octave.indexOf(pitch) - fixedNoteIndex;
+var fixedNotePitch = 'a4';
+var fixedNoteIndex = __WEBPACK_IMPORTED_MODULE_0__lib_helpers__["b" /* octave */].indexOf(fixedNotePitch);
+/**
+ * A4 can correspond to any frequency, but 440Hz is widely used for modern music.
+ */
+var fixedNoteFreq = 440;
+/**
+ * The relationship between any two adjacent pitches in 12tet is the 12th root of 2,
+ * that is, that number which, when multiplied by itself 12 time, yields 2.
+ */
+var pitchDistance = Math.pow(2, (1 / 12));
+/**
+ * Represents one key in the synthesizer keyboard.
+ * Each key has a QWERTY key code and key name, pitch (piano key name),
+ * integer distance from fixed note (measured in half steps), and frequency.
+ * Note that all params are passed in from the Keyboard class, and are generated by the helpers file.
+ * @constructor
+ * @param {string} pitch
+ * @param {number} qwertyCode
+ * @param {string} qwertyName
+ */
+var Key = /** @class */ (function () {
+    function Key(_a) {
+        var pitch = _a.pitch, qwertyCode = _a.qwertyCode, qwertyName = _a.qwertyName;
+        this.pitch = pitch;
+        this.qwertyCode = qwertyCode;
+        this.qwertyName = qwertyName;
+        var stepDistance = this.getStepDistance(pitch);
+        this.frequency = this.getFrequency(stepDistance);
     }
-  }, {
-    key: 'getFrequency',
-    value: function getFrequency(stepDistance) {
-      var frequency = fixedNoteFreq * Math.pow(pitchDistance, stepDistance);
-      return frequency.toFixed(3);
-    }
-  }]);
+    /**
+     * Returns a positive or negative integer indicating the number of half steps from the fixed note
+     * @param {string} pitch
+     */
+    Key.prototype.getStepDistance = function (pitch) {
+        return __WEBPACK_IMPORTED_MODULE_0__lib_helpers__["b" /* octave */].indexOf(pitch) - fixedNoteIndex;
+    };
+    /**
+     * Returns the frequency (Hz) associated with a given pitch (to three decimal places).
+     * Refer to lib/notes.js for more documentation on how frequency is calculated.
+     * @param {number} stepDistance
+     */
+    Key.prototype.getFrequency = function (stepDistance) {
+        // Decimal place to which to round
+        var dec = 100;
+        // Have to use Math.round and multiplying then dividing by `dec` in order to return a number
+        // toFixed(num) returns a string, which is the wrong type
+        return Math.round(fixedNoteFreq * Math.pow(pitchDistance, stepDistance) * dec) / dec;
+    };
+    return Key;
+}());
 
-  return Key;
-}();
+
 
 /***/ })
 /******/ ]);
