@@ -1,6 +1,8 @@
-'use strict';
-
 export class AudioCtx {
+  amp: GainNode;
+  ctx: AudioContext;
+  osc: OscillatorNode;
+
   constructor() {
     this.ctx = new AudioContext();
 

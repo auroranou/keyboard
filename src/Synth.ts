@@ -1,9 +1,10 @@
-'use strict';
-
 import { AudioCtx } from './AudioCtx';
 import { Keyboard } from './Keyboard';
 
 export class Synth {
+  audio: AudioCtx;
+  keyboard: Keyboard;
+
   constructor() {
     // First set up a new audio context
     this.audio = new AudioCtx();

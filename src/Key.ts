@@ -1,6 +1,10 @@
-'use strict';
-
 import { octave } from './lib/helpers';
+
+export type KeyOpts = {
+  pitch: string;
+  qwertyCode: number;
+  qwertyName: string;
+}
 
 /**
  * The A above middle C is commonly used to set other pitches in the scale against
@@ -30,7 +34,12 @@ const pitchDistance = Math.pow(2, (1 / 12))
  * @param {string} qwertyName
  */
 export class Key {
-  constructor(pitch, qwertyCode, qwertyName) {
+  frequency: number;
+  pitch: string;
+  qwertyCode: number;
+  qwertyName: string;
+
+  constructor({ pitch, qwertyCode, qwertyName }: KeyOpts) {
     this.pitch = pitch;
     this.qwertyCode = qwertyCode;
     this.qwertyName = qwertyName;
@@ -43,7 +52,7 @@ export class Key {
    * Returns a positive or negative integer indicating the number of half steps from the fixed note
    * @param {string} pitch 
    */
-  getStepDistance(pitch) {
+  getStepDistance(pitch: string): number {
     return octave.indexOf(pitch) - fixedNoteIndex;
   }
 
@@ -52,8 +61,11 @@ export class Key {
    * Refer to lib/notes.js for more documentation on how frequency is calculated.
    * @param {number} stepDistance 
    */
-  getFrequency(stepDistance) {
-    const frequency = fixedNoteFreq * Math.pow(pitchDistance, stepDistance);
-    return frequency.toFixed(3);
+  getFrequency(stepDistance: number): number {
+    // Decimal place to which to round
+    const dec = 100;
+    // Have to use Math.round and multiplying then dividing by `dec` in order to return a number
+    // toFixed(num) returns a string, which is the wrong type
+    return Math.round(fixedNoteFreq * Math.pow(pitchDistance, stepDistance) * dec) / dec;
   }
 }

@@ -1,20 +1,23 @@
-'use strict';
-
-import { Key } from './Key';
+import { AudioCtx } from './AudioCtx';
+import { Key, KeyOpts } from './Key';
 import { octave, keys } from './lib/helpers';
 
 /**
  * Keyboard part of the synthesizer; receives a shared audio context from the Synth class.
  * @constructor
- * @param {AudioContext} audio
+ * @param {AudioCtx} audio
  */
 export class Keyboard {
-  constructor(audio) {
+  audio: AudioCtx;
+  keys: Key[];
+
+  constructor(audio: AudioCtx) {
     this.audio = audio;
 
-    this.keys = keys.map(k => {
-      return new Key(k.pitch, k.qwertyCode, k.qwertyName);
+    this.keys = keys.map((k: KeyOpts) => {
+      return new Key({ ...k });
     });
+    console.log(this.keys);
 
     this.buildKeyboardHtml();
     this.bindKeyEvents();
@@ -56,16 +59,16 @@ export class Keyboard {
    * Attempt to find the piano key corresponding to the computer key that has been manipulated.
    * @param {number} code 
    */
-  getNoteFromKeyCode(code) {
-    return this.keys.find(k => k.qwertyCode == code);
+  getNoteFromKeyCode(code: number): Key {
+    return this.keys.filter((k: Key) => k.qwertyCode === code)[0];
   }
 
   /**
    * If a matching note is found, set the audio context's frequency to the note frequency
    * in order to play the note. Also manipulate element's CSS to give a visual cue of which note is active.
-   * @param {HTMLEvent} e 
+   * @param {KeyboardEvent} e 
    */
-  playNote(e) {
+  playNote(e: KeyboardEvent) {
     let note = this.getNoteFromKeyCode(e.keyCode);
     if (!note) return;
 
@@ -77,9 +80,9 @@ export class Keyboard {
 
   /**
    * Stop sending power to the audio context's amp and remove any active classes.
-   * @param {HTMLEvent} e 
+   * @param {KeyboardEvent} e 
    */
-  releaseNote(e) {
+  releaseNote(e: KeyboardEvent) {
     let note = this.getNoteFromKeyCode(e.keyCode);
     this.audio.amp.gain.value = 0;
 
