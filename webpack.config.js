@@ -26,7 +26,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.scss', '.css']
+    extensions: ['.ts', '.js', '.scss', '.css']
   },
   module: {
     loaders: [
