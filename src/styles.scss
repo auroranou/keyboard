@@ -1,5 +1,7 @@
 @import './normalize.css';
 
+$header-height: 120px;
+
 $keyboard-height: 220px;
 $key-width-black: 24px;
 $key-width-white: 48px;
@@ -22,7 +24,8 @@ html {
   border-radius: 8px;
   display: inline-grid;
   grid-template-areas: 'panel-left body panel-right';
-  grid-template-columns: 10rem (8 * $key-width-white) 5rem;
+  grid-template-columns: 12rem (8 * $key-width-white) 4rem;
+  margin: 2rem;
 }
 
 /* Left-hand control panel */
@@ -32,7 +35,8 @@ html {
   grid-template-areas: 'dial dial'
                        'volume transpose'
                        'modulator modulator';
-  grid-template-rows: calc(60px + 2rem) 2fr 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: $header-height 2fr 1fr;
 }
 
 #alpha-dial {
@@ -41,10 +45,10 @@ html {
   .dial {
     border: 1px solid #fff;
     border-radius: 50%;
-    height: 60px;
+    height: 5rem;
     margin: 1rem auto;
     position: relative;
-    width: 60px;
+    width: 5rem;
 
     &::after {
       color: #fff;
@@ -79,20 +83,40 @@ html {
 }
 
 #transpose-buttons {
+  @include control-panel-label();
   grid-area: transpose;
+  padding: 1rem;
+  text-align: center;
+
+  button {
+    @include control-panel-label();
+    background: inherit;
+    display: inline-block;
+    font-size: 8px;
+    padding: 4px;
+    width: 48%;
+    word-break: break-word;
+    word-wrap: break-word;
+  }
 }
 
 #modulator {
+  @include control-panel-label();
   grid-area: modulator;
+  padding: 1rem;
+  text-align: center;
 }
 
 /* Middle part, including keyboard */
 #synth__body {
+  display: grid;
   grid-area: body;
+  grid-template-areas: 'header' 'keyboard';
+  grid-template-rows: 2fr 3fr;
 }
 
 #header {
-  height: calc(60px + 2rem);
+  height: $header-height;
 }
 
 #keyboard {

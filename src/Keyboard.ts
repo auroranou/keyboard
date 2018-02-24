@@ -17,7 +17,6 @@ export class Keyboard {
     this.keys = keys.map((k: KeyOpts) => {
       return new Key({ ...k });
     });
-    console.log(this.keys);
 
     this.buildKeyboardHtml();
     this.bindKeyEvents();
