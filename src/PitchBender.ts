@@ -10,6 +10,8 @@ export class PitchBender {
   audio: AudioCtx;
 
   constructor(audio: AudioCtx) {
+    this.audio = audio;
+
     this.bindKeyEvents();
   }
 
