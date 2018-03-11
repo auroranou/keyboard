@@ -1,45 +1,42 @@
 ## making noises with the web audio api
 
-### local dev
+### local development
+
+Install packages using `yarn`:
 ```
 yarn install
 yarn start
-// runs at localhost:8080
+// local site runs at localhost:8080
 ```
 
-to run eslint and tests, make sure you have eslint installed:
-```
-yarn install -g eslint
-yarn test
-```
-
-tests are run using `tape`.
+For linting and tests: `yarn test` (Tests are run using `tape`.)
 
 ### what is even happening
-this project is an attempt at recreating a (very, very pared down) version of a [roland juno alpha juno 2](http://www.vintagesynth.com/roland/ajuno2.php) synthesizer using js and the web audio api.
 
+This project is an attempt at recreating some of the functionality of my synthesizer (a [Roland Alpha Juno 2](http://www.vintagesynth.com/roland/ajuno2.php)) using Typescript and the web audio API.
+
+Specs:
+- 1 octave keyboard (11 notes vs the original's 61)
 
 ### playing notes
-c major scale (💻 ️s = 🎹 middle c)
+
+#### C major scale (💻 ️s = 🎹 middle c)
 ```
 s d f g h j k
 ```
 
-
-chromatic scale
+#### Chromatic scale
 ```
 s e d r f g y h u j i k
 ```
 
-
-💀 💀 💀 (chopin's funeral march)
+#### 💀 💀 💀 (Chopin's funeral march)
 ```
 s s s s
 f r e e e s e
 ```
 
-
-👩 🐑 🌨 (some song about a lamb)
+#### 👩 🐑 🌨 (some song about a lamb)
 ```
 d s a s d d d d s s d s a
 f d s d f f f
